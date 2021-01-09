@@ -9,19 +9,28 @@
 
 {%block content%}
     <h1>This is the board page</h1>
-    <table>
-        {% for i,row in enum(board) %}
-        <tr id = {{i}}>
-            {% for j,col in enum(row) %}
-                <td id = {{j}} class = "tile">{{i}},{{j}}</td>           
+    {% for msg in get_flashed_messages() %}
+        <p>{{msg}}</p>
+    {% endfor %}
+    <div>
+        <table>
+            {% for i,row in enum(board) %}
+            <tr id = {{i}}>
+                {% for j,col in enum(row) %}
+                    <td id = {{j}} class = "tile">{{i}},{{j}}</td>           
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
+        </table>
+    </div>
 
-    <form action="/guess_word" id="guess_form">
-        <input type="text" name="guess">
+
+    <form id="guess_form">
+        <input type="text" name="word_guess">
         <button>Submit</button>
     </form>
 
 {%endblock%}
+{% block scripts %}
+<script src = "../static/board_script.js"></script>
+{% endblock %}
