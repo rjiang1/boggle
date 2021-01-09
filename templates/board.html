@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{%block title%}
+    This is the board page
+{%endblock%}
+
+{% block heads %} 
+<link rel="stylesheet" href="../static/board_style.css" type="text/css"> 
+{% endblock %}
+
+{%block content%}
+    <h1>This is the board page</h1>
+    <table>
+        {% for i,row in enum(board) %}
+        <tr id = {{i}}>
+            {% for j,col in enum(row) %}
+                <td id = {{j}} class = "tile">{{i}},{{j}}</td>           
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+
+    <form action="/guess_word" id="guess_form">
+        <input type="text" name="guess">
+        <button>Submit</button>
+    </form>
+
+{%endblock%}
