@@ -12,7 +12,7 @@
     {% for msg in get_flashed_messages() %}
         <p>{{msg}}</p>
     {% endfor %}
-    <div>
+    <div id='div_table'>
         <table>
             {% for i,row in enum(board) %}
             <tr id = {{i}}>
@@ -24,11 +24,13 @@
         </table>
     </div>
 
+    <div id='form_div'>
+        <form id="guess_form">
+            <input type="text" name="word_guess" id='word_input'>
+            <button>Submit</button>
+        </form>
+    </div>
 
-    <form id="guess_form">
-        <input type="text" name="word_guess">
-        <button>Submit</button>
-    </form>
 
 {%endblock%}
 {% block scripts %}

@@ -4,10 +4,31 @@
 
 h1 {
     color: pink;
-}
-
-table {
     margin-left: auto;
     margin-right: auto;
-    border: 5px solid black;
+    text-align: center;
+}
+
+#div_table {
+    margin: auto;
+    width: 50%;
+    border: 3px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+table{
+    margin: 0 auto;
+}
+
+form{
+    /* margin: 0 auto; */
+    text-align: center;
+}
+
+#form_div {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
 }
