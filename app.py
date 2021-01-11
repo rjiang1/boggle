@@ -1,6 +1,6 @@
 from boggle import Boggle
 from flask import redirect, Flask, request, render_template
-from flask import session, make_response, flash
+from flask import session, make_response, flash, jsonify
 boggle_game = Boggle()
 
 app = Flask(__name__)
@@ -8,26 +8,19 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = "never-tell!"
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
-board = Boggle()
-layout = board.make_board()
 
 @app.route("/")
 def inits():
-    session['layout'] = layout
-    return redirect("/board")
-
-@app.route("/board")
-def show_board():
-    
+    board = boggle_game.make_board()
+    session["board"] = board
     return render_template("board.html", 
-        board = layout, enum = enumerate)
+        board = session['board'], enum = enumerate)
 
-# @app.route("/guess")
-# def check_guess():
-#     word = request.form['word_guess']
-#     if word.lower() in board.words:
-#         print('hello')
-#     else:
-#         flash("That is not a word in the word list")
 
-#     return redirect("/board")
+@app.route("/guess")
+def check_guess():
+    word = request.args["word"]
+    board = session["board"]
+    response = boggle_game.check_valid_word(board, word)
+
+    return jsonify({"result" : response})
