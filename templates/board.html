@@ -9,15 +9,13 @@
 
 {%block content%}
     <h1>This is the board page</h1>
-    {% for msg in get_flashed_messages() %}
-        <p>{{msg}}</p>
-    {% endfor %}
+    <div>Game stops in <span id="time">1:00</span> minutes!</div>
     <div id='div_table'>
         <table>
             {% for i,row in enum(board) %}
             <tr id = {{i}}>
                 {% for j,col in enum(row) %}
-                    <td id = {{j}} class = "tile">{{i}},{{j}}</td>           
+                    <td id = {{j}} class = "tile">{{board[i][j]}}</td>           
                 {% endfor %}
             </tr>
             {% endfor %}
@@ -25,11 +23,23 @@
     </div>
 
     <div id='form_div'>
+        <button id='start_button'>Start Game!</button>
         <form id="guess_form" method="POST">
             <input type="text" name="word" id='word_input' autofocus>
             <button>Submit</button>
         </form>
     </div>
+    <div>
+        <h4>Messages</h4>
+        <p id="msg">Messages show here</p>
+
+        <h4>Score</h4>
+        <p id="score">0</p>
+
+        <h4>High Score</h4>
+        <p id="hi_score">{{highscore}} out of {{nplays}} games</p>
+    </div>
+
 
 
 {%endblock%}
